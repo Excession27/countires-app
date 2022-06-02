@@ -26,15 +26,15 @@ const CountryCard: React.FC<any> = (prop: { data: Country }) => {
           <p className="card__stats-cont__top-lvl-domain">
             Top level domain: {prop.data.tld}
           </p>
-          {/* <p className="card__stats-cont__currencies">Currencies: {prop.data.currencies ? Object.entries(prop.data.currencies)[0][1].name : ""}</p> */}
-          <p className="card__stats-cont__currencies">
+          <p className="card__stats-cont__currencies">Currencies: {prop.data.currencies ? Object.entries(prop.data.currencies)[0][1].name : ""}</p>
+          {/* <p className="card__stats-cont__currencies">
             Currencies:{" "}
             {prop.data.currencies
               ? Object.entries(prop.data.currencies).reduce((currentValue) =>
                   console.log(currentValue[1].name)
                 )
               : ""}
-          </p>
+          </p> */}
           <p className="card__stats-cont__lang">
             Languages:{" "}
             {prop.data.languages
