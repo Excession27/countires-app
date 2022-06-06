@@ -1,9 +1,8 @@
 import "./CountryPage.css";
-import { Country } from "../country";
+import { Country } from "../../country";
 import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
 
-const CountryCard: React.FC<any> = (prop: { data: Country }) => {
+const CountryPage: React.FC<any> = (prop: { data: Country }) => {
   const {
     name,
     borders,
@@ -40,26 +39,39 @@ const CountryCard: React.FC<any> = (prop: { data: Country }) => {
     return result.name === undefined ? result : result.name;
   }, []);
 
-  const getBorderingList = useCallback((country: String) => {
-    async function getData() {
-      const response = await axios.get(
-        `https://restcountries.com/v3.1/alpha/${country}`
-      );
+  // const getBorderingList = useCallback((country: String) => {
+  //   async function getData() {
+  //     const response = await axios.get(
+  //       `https://restcountries.com/v3.1/alpha/${country}`
+  //     );
 
-      const result = response.data[0].name.common;
-      console.log("result");
-      console.log(result);
+  //     const result = response.data[0].name.common;
+  //     console.log("result");
+  //     console.log(result);
 
-      setBordering((previousArray) => [...previousArray, { name: result }]);
-    }
-    getData();
-  }, []);
+  //     //setBordering((previousArray) => [...previousArray, { name: result }]);
+  //     setBordering([...bordering, { name: result }]);
+  //   }
+  //   getData();
+  // }, []);
 
-  useEffect(() => {
-    borders?.forEach((shorthand) => {
-      getBorderingList(shorthand);
-    });
-  }, [getBorderingList, borders]);
+  // useEffect(() => {
+  //   async function getData() {
+  //     const response = await axios.get(
+  //       "https://restcountries.com/v3.1/name/germany"
+  //     );
+  //     const info = await response.data;
+
+  //     return info;
+  //   }
+  //   getData();
+  // }, []);
+
+  // useEffect(() => {
+  //   borders?.forEach((shorthand) => {
+  //     getBorderingList(shorthand);
+  //   });
+  // }, [getBorderingList, borders]);
 
   return (
     <div className="card">
@@ -84,12 +96,11 @@ const CountryCard: React.FC<any> = (prop: { data: Country }) => {
           </p>
           <p className="card__stats-cont__lang">
             Languages:{" "}
-            {languages
-              ? Object.values(languages).reduce(
-                  (previousValue, currentValue) =>
-                    previousValue + ", " + currentValue
-                )
-              : ""}
+            {languages &&
+              Object.values(languages).reduce(
+                (previousValue, currentValue) =>
+                  previousValue + ", " + currentValue
+              )}
           </p>
         </div>
         <div className="card__border-countries">
@@ -105,4 +116,4 @@ const CountryCard: React.FC<any> = (prop: { data: Country }) => {
   );
 };
 
-export default CountryCard;
+export default CountryPage;
