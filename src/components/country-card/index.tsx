@@ -17,7 +17,7 @@ const CountryCard: React.FC<any> = (prop: any) => {
   return (
     <div className="CountryCard mb-16 rounded-lg bg-slate-50 drop-shadow-lg">
       <img src={flags.svg} className="rounded-t-lg w-full" alt="" />
-      <div className="pl-6 pt-4 pb-10">
+      <div className="pl-6 pt-4 pb-8">
         <h2 className="font-bold my-4 text-lg">{name.common}</h2>
         <div className="my-1 flex">
           <p className="font-semibold mr-1">Population:</p>

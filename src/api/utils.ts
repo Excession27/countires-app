@@ -1,4 +1,4 @@
 import { AxiosResponse } from "axios";
-import { Country } from "../country";
+import { CountryType } from "./country/types";
 
-export type APICall<T> = Promise<AxiosResponse<Country>>;
+export type APICall<CountryType> = Promise<AxiosResponse<CountryType>>;

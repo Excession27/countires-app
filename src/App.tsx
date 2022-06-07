@@ -1,13 +1,16 @@
-import { QueryClient, QueryClientProvider } from "react-query";
-import Home from "./containers/Home";
-
-const queryClient = new QueryClient();
+import { BrowserRouter } from "react-router-dom";
+import Views from "./views";
+import ReactQueryProvider from "./components/ReactQueryProvider";
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Home />
-    </QueryClientProvider>
+    <ReactQueryProvider
+      children={
+        <BrowserRouter>
+          <Views />
+        </BrowserRouter>
+      }
+    />
   );
 }
 

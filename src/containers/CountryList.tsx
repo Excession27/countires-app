@@ -1,23 +1,46 @@
 import CountryCard from "../components/country-card";
 import { useQuery } from "react-query";
-import { getAllCountries } from "../api/country";
-import { Country } from "../country";
+import {
+  getAllCountries,
+  getCountriesByRegion,
+  getCountriesByName,
+} from "../api/country";
+import { CountryType } from "../api/country/types";
 import { useState } from "react";
+import AsyncComponent from "../components/hoc/AsyncComponent";
 
 function CountryList() {
-  const [search, setSearch] = useState("");
-  const [filterRegion, setFilterRegion] = useState("");
-  const { data, status } = useQuery("allCountries", getAllCountries);
+  const [filter, setFilter] = useState<{ name: string; region: string }>({
+    name: "",
+    region: "",
+  });
 
-  const countriesData = data?.data;
+  const { data: countries, status: countriesStatus } = useQuery(
+    ["all-countries", filter],
+    async () => {
+      let response;
+      if (filter?.name) {
+        response = await getCountriesByName(filter.name);
+        if (filter?.region) {
+          response.data = response?.data.filter(
+            (country: CountryType) => country.region === filter.region
+          );
+        }
+      } else if (filter?.region) {
+        response = await getCountriesByRegion(filter.region);
+      } else response = await getAllCountries();
 
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
+      return response?.data ?? [];
+    }
+  );
 
-  if (status === "error") {
-    return <div>An error has occured.</div>;
-  }
+  const setFilterName = (value: string) => {
+    setFilter((p) => ({ ...p, name: value }));
+  };
+
+  const setFilterRegion = (value: string) => {
+    setFilter((p) => ({ ...p, region: value }));
+  };
 
   return (
     <>
@@ -27,34 +50,35 @@ function CountryList() {
           className="p-2"
           placeholder="Search for a country"
           onChange={(event) => {
-            setSearch(event.target.value);
+            setFilterName(event.target.value);
           }}
         ></input>
-        <select name="region">
-          <option defaultValue={""} onClick={() => setFilterRegion("")}>
-            Filter by region
-          </option>
-          <option onClick={() => setFilterRegion("Africa")}>Africa</option>
-          <option onClick={() => setFilterRegion("Americas")}>Americas</option>
-          <option onClick={() => setFilterRegion("Asia")}>Asia</option>
-          <option onClick={() => setFilterRegion("Europe")}>Europe</option>
-          <option onClick={() => setFilterRegion("Oceania")}>Oceania</option>
+        <select
+          name="region"
+          onChange={(event) => {
+            setFilterRegion(event.target.value);
+          }}
+        >
+          <option defaultValue={""}>Filter by region</option>
+          <option value="Africa">Africa</option>
+          <option value="Americas">Americas</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europe</option>
+          <option value="Oceania">Oceania</option>
         </select>
       </div>
 
       <div className="w-full px-4 bg-slate-100">
-        {countriesData
-          .filter((country: Country) => country.region?.includes(filterRegion))
-          .filter((country: Country) => {
-            if (
-              country.name.common.toLowerCase().includes(search.toLowerCase())
-            ) {
-              return country;
-            }
-          })
-          .map((country: Country, index: Number) => (
-            <CountryCard data={country} key={index} />
-          ))}
+        <AsyncComponent
+          component={
+            <>
+              {countries?.map((country: CountryType, index: Number) => (
+                <CountryCard data={country} key={index} />
+              ))}
+            </>
+          }
+          status={countriesStatus}
+        />
       </div>
     </>
   );

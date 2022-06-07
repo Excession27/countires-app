@@ -1,4 +1,4 @@
-export interface Country {
+export type CountryType = {
   name: {
     common: string;
     official: string;
@@ -21,7 +21,7 @@ export interface Country {
   idd?: Object;
   capital?: Array<string>;
   altSpellings?: Array<string>;
-  region?: string;
+  region: string;
   subregion?: string;
   languages: Object;
   translations?: Object;
@@ -47,4 +47,4 @@ export interface Country {
   capitalInfo?: {
     latlng: [lat: number, long: number];
   };
-}
+};

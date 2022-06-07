@@ -1,8 +1,8 @@
 import "./CountryPage.css";
-import { Country } from "../../country";
-import React, { useCallback, useEffect, useState } from "react";
+import { CountryType } from "../../api/country/types";
+import { FC, useCallback, useState } from "react";
 
-const CountryPage: React.FC<any> = (prop: { data: Country }) => {
+const CountryPage: FC<any> = (prop: { data: CountryType }) => {
   const {
     name,
     borders,
@@ -107,7 +107,7 @@ const CountryPage: React.FC<any> = (prop: { data: Country }) => {
           <p>
             Borders:{" "}
             {bordering.map((country: any, index: Number) => {
-              return <li key={index.toString()}>{country.name}</li>;
+              return <li key={index.toString()}>{country.name.common}</li>;
             })}
           </p>
         </div>
