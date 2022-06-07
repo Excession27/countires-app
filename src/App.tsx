@@ -1,10 +1,13 @@
-import CountryCard from "./components/country-card";
+import { QueryClient, QueryClientProvider } from "react-query";
+import Home from "./containers/Home";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <CountryCard />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Home />
+    </QueryClientProvider>
   );
 }
 

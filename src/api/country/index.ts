@@ -1,23 +1,14 @@
 import axios from "../../httpClient/axiosInstance";
+import { APICall } from "../utils";
 
-export async function getCountriesByName(name: String) {
-  const { data } = await axios.get(`/name/${name}`);
-  return data;
-}
+export const getAllCountries = () => axios.get(`/all`);
+//export const getAllCountries = () => axios.get(`/name/germany`);
 
-export async function getAllCountries() {
-  const { data } = await axios.get(`/all`);
-  return data;
-}
+export const getCountriesByName = (name: String): APICall<Array<String>> =>
+  axios.get(`/name/${name}`);
 
-export async function getByCode(code: String) {
-  const { data } = await axios.get(
-    `https://restcountries.com/v3.1/alpha/${code}`
-  );
-  return data;
-}
+export const getCountriesByCode = (code: String): APICall<Array<String>> =>
+  axios.get(`/alpha/${code}`);
 
-export async function getByRegion(region: String) {
-  const { data } = await axios.get(`/region/${region}`);
-  return data;
-}
+export const getCountriesByRegion = (region: String): APICall<Array<String>> =>
+  axios.get(`/region/${region}`);

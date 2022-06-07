@@ -1,0 +1,15 @@
+App {
+    # On load show all countries - data loaded in the Card
+    CountryCards --OnClick-> CountryPage
+}
+
+CountryCard {
+    Name
+    Population
+    Region
+    Capital
+} 
+
+CountryPage {
+
+}
