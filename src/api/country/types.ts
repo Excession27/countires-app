@@ -48,3 +48,7 @@ export type CountryType = {
     latlng: [lat: number, long: number];
   };
 };
+export type DarkContextType = {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+};

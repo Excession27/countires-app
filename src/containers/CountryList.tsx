@@ -8,6 +8,8 @@ import {
 import { CountryType } from "../api/country/types";
 import { useState } from "react";
 import AsyncComponent from "../components/hoc/AsyncComponent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function CountryList() {
   const [filter, setFilter] = useState<{ name: string; region: string }>({
@@ -44,22 +46,28 @@ function CountryList() {
 
   return (
     <>
-      <div className="my-6 flex flex-col">
-        <i></i>
-        <input
-          className="p-2"
-          placeholder="Search for a country"
-          onChange={(event) => {
-            setFilterName(event.target.value);
-          }}
-        ></input>
+      <div className="py-6 px-4 flex flex-col dark:bg-gray-800">
+        <div className="flex items-center">
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="dark:text-slate-200 dark:bg-gray-600 p-3 rounded-l-lg"
+          />
+          <input
+            className="px-1 py-2 dark:bg-gray-600 dark:text-slate-200 w-full rounded-r-lg"
+            placeholder="Search for a country"
+            onChange={(event) => {
+              setFilterName(event.target.value);
+            }}
+          ></input>
+        </div>
         <select
           name="region"
+          className="dark:bg-gray-600 dark:text-slate-200 my-4 rounded-lg h-10 w-1/2 p-2"
           onChange={(event) => {
             setFilterRegion(event.target.value);
           }}
         >
-          <option defaultValue={""}>Filter by region</option>
+          <option defaultValue={""}>Filter by region </option>
           <option value="Africa">Africa</option>
           <option value="Americas">Americas</option>
           <option value="Asia">Asia</option>
@@ -68,7 +76,7 @@ function CountryList() {
         </select>
       </div>
 
-      <div className="w-full px-4 bg-slate-100">
+      <div className="w-full h-full px-4 bg-slate-50 dark:bg-gray-800 dark:text-slate-200">
         <AsyncComponent
           component={
             <>

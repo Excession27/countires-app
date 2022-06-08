@@ -15,7 +15,7 @@ const CountryCard: React.FC<any> = (prop: any) => {
     flags: any;
   } = prop.data;
   return (
-    <div className="CountryCard mb-16 rounded-lg bg-slate-50 drop-shadow-lg">
+    <div className="CountryCard mb-16 rounded-lg bg-slate-50 drop-shadow-lg dark:bg-gray-600">
       <img src={flags.svg} className="rounded-t-lg w-full" alt="" />
       <div className="pl-6 pt-4 pb-8">
         <h2 className="font-bold my-4 text-lg">{name.common}</h2>
