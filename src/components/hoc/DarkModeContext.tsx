@@ -1,19 +1,21 @@
 import { createContext, useEffect, useState } from "react";
 
-export const DarkModeContext = createContext<any>({
-  darkMode: localStorage.getItem("darkMode") || false,
-});
+export const DarkModeContext = createContext<any>({});
 
 export default function DarkModeContextProvider({ children }: any) {
-  const loadDarkModeSetting =
-    localStorage.getItem("darkMode") === undefined
-      ? false
-      : localStorage.darkMode;
-  const [darkMode, setDarkMode] = useState<boolean>(loadDarkModeSetting);
+  const [darkMode, setDarkMode] = useState<boolean>(() =>
+    localStorage.darkMode === "true" ? true : false
+  );
 
   useEffect(() => {
-    localStorage.setItem("darkMode", darkMode.toString());
-    document.querySelector("body")?.classList.toggle("dark");
+    localStorage.darkMode = darkMode;
+    console.log(darkMode);
+    if (!darkMode) {
+      document.querySelector("body")?.classList.remove("dark");
+    }
+    if (darkMode) {
+      document.querySelector("body")?.classList.add("dark");
+    }
   }, [darkMode]);
 
   return (

@@ -1,6 +1,4 @@
 const CountryCard: React.FC<any> = (prop: any) => {
-  console.log("CountryCard");
-  console.log(prop);
   const {
     name,
     population,
