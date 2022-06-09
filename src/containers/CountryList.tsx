@@ -10,6 +10,7 @@ import { useState } from "react";
 import AsyncComponent from "../components/hoc/AsyncComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function CountryList() {
   const [filter, setFilter] = useState<{ name: string; region: string }>({
@@ -45,7 +46,7 @@ function CountryList() {
   };
 
   return (
-    <>
+    <div className="pb-10 mb-10">
       <div className="py-6 px-4 flex flex-col dark:bg-gray-800">
         <div className="flex items-center">
           <FontAwesomeIcon
@@ -81,14 +82,16 @@ function CountryList() {
           component={
             <>
               {countries?.map((country: CountryType, index: Number) => (
-                <CountryCard data={country} key={index} />
+                <Link to={`/code/${country.ccn3}`} key={index.toString()}>
+                  <CountryCard data={country} key={index} />
+                </Link>
               ))}
             </>
           }
           status={countriesStatus}
         />
       </div>
-    </>
+    </div>
   );
 }
 

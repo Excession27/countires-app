@@ -1,5 +1,7 @@
+import { ReactNode, Dispatch, SetStateAction } from "react";
+
 export type CountryType = {
-  name: {
+  name?: {
     common: string;
     official: string;
     nativeName: {
@@ -48,7 +50,10 @@ export type CountryType = {
     latlng: [lat: number, long: number];
   };
 };
+
+export type DarkContextProviderProps = { children: ReactNode };
+
 export type DarkContextType = {
   darkMode: boolean;
-  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setDarkMode: Dispatch<SetStateAction<boolean>>;
 };

@@ -1,11 +1,12 @@
 import { Routes, Route } from "react-router-dom";
+import CountryPage from "../containers/CountryPage";
 import Home from "../containers/Home";
 
 const Views = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/name/" />
+      <Route path="/code/:countryCode" element={<CountryPage />} />
       <Route
         path="*"
         element={
