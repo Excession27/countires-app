@@ -68,24 +68,37 @@ const CountryInfo: FC<any> = () => {
           </h2>
 
           <div className="card__stats space-y-2 py-6">
-            <p className="card__stats__native-name">Native name: {}</p>
-            <p className="card__stats__population">
-              Population: {population?.toLocaleString()}
+            <p className="card__stats__native-name">
+              <span className="font-semibold">
+                {`Native name: ${name?.nativeName?.eng}`}
+              </span>{" "}
+              {}
             </p>
-            <p className="card__stats_region">Region: {region}</p>
-            <p className="card__stats_sub-region">Sub Region: {subregion}</p>
-            <p className="card__stats__capital">Capital: {capital}</p>
+            <p className="card__stats__population">
+              <span className="font-semibold">Population:</span>{" "}
+              {population?.toLocaleString()}
+            </p>
+            <p className="card__stats_region">
+              <span className="font-semibold">Region:</span> {region}
+            </p>
+            <p className="card__stats_sub-region">
+              <span className="font-semibold">Sub Region:</span> {subregion}
+            </p>
+            <p className="card__stats__capital">
+              <span className="font-semibold">Capital:</span> {capital}
+            </p>
           </div>
 
           <div className="card__stats-cont space-y-2">
             <p className="card__stats-cont__top-lvl-domain">
-              Top level domain: {tld}
+              <span className="font-semibold">Top level domain:</span> {tld}
             </p>
             <p className="card__stats-cont__currencies">
-              Currencies: {getCurrencies(currencies)}
+              <span className="font-semibold">Currencies:</span>{" "}
+              {getCurrencies(currencies)}
             </p>
             <p className="card__stats-cont__lang">
-              Languages:{" "}
+              <span className="font-semibold">Languages:</span>{" "}
               {languages &&
                 Object.values(languages).reduce(
                   (previousValue, currentValue) =>
@@ -94,7 +107,7 @@ const CountryInfo: FC<any> = () => {
             </p>
           </div>
           <div className="card__border-countries my-6 flex flex-wrap gap-2">
-            <p>Borders:</p>
+            <span className="font-semibold">Border countries:</span>
 
             <div className="flex flex-wrap gap-3">
               {(borders || []).map((code: string, index: number) => {

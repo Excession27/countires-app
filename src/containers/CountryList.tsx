@@ -62,7 +62,7 @@ function CountryList() {
         </div>
         <select
           name="region"
-          className="my-4 h-10 w-1/3 rounded-lg p-2 dark:bg-gray-600 dark:text-slate-200 sm:w-1/5"
+          className="my-4 h-10 w-1/2 rounded-lg p-2 dark:bg-gray-600 dark:text-slate-200 sm:w-1/5"
           onChange={(event) => {
             setFilterRegion(event.target.value);
           }}

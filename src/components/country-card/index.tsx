@@ -5,7 +5,7 @@ const CountryCard: React.FC<any> = (prop: { data: CountryType }) => {
   const { name, population, region, capital, flags, ccn3 } = prop.data;
   return (
     <Link
-      className="sm:h-100 mb-16 rounded-lg bg-slate-50 drop-shadow-lg dark:bg-gray-600 sm:m-0 sm:w-72 md:w-60"
+      className="mb-16 block rounded-lg bg-slate-50 drop-shadow-lg dark:bg-gray-600 sm:m-0 sm:w-72 md:w-60"
       to={`/code/${ccn3}`}
     >
       <img src={flags?.png} className="w-full rounded-t-lg" alt="" />
