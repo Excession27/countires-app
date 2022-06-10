@@ -30,12 +30,6 @@ const CountryInfo: FC<any> = () => {
     languages,
   } = country ?? {};
 
-  const nativeName = () => {
-    console.log(Object.values(name?.nativeName));
-    console.log();
-  };
-  nativeName();
-
   const getCurrencies = useCallback((currencies: any) => {
     let allCurrencies: any = [];
     let result: any = "";
