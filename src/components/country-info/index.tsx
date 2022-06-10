@@ -53,14 +53,14 @@ const CountryInfo: FC<any> = () => {
   }, []);
 
   return (
-    <div className="card px-6 dark:bg-gray-800 dark:text-slate-200">
+    <div className="card px-6 dark:bg-gray-800 dark:text-slate-200 md:px-20">
       <Btn link={"/"} text={"<-- Back"} />
 
       <div className=" sm:flex sm:gap-8">
         <img
           src={flags?.svg}
           alt={`Flag of ${name?.common}`}
-          className="pt-14 sm:w-1/2"
+          className="aspect-auto pt-14 sm:h-1/2 sm:w-1/2 xl:h-1/3 xl:w-1/3"
         />
         <div className="card__info sm:w-1/2">
           <h2 className="card__country-name pt-8 text-3xl font-bold">
