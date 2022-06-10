@@ -30,6 +30,12 @@ const CountryInfo: FC<any> = () => {
     languages,
   } = country ?? {};
 
+  const nativeName = () => {
+    console.log(Object.values(name?.nativeName));
+    console.log();
+  };
+  nativeName();
+
   const getCurrencies = useCallback((currencies: any) => {
     let allCurrencies: any = [];
     let result: any = "";
@@ -69,10 +75,8 @@ const CountryInfo: FC<any> = () => {
 
           <div className="card__stats space-y-2 py-6">
             <p className="card__stats__native-name">
-              <span className="font-semibold">
-                {`Native name: ${name?.nativeName?.eng}`}
-              </span>{" "}
-              {}
+              <span className="font-semibold">{`Native name:`}</span>{" "}
+              {name?.nativeName[Object.keys(name?.nativeName)[0]].common}
             </p>
             <p className="card__stats__population">
               <span className="font-semibold">Population:</span>{" "}

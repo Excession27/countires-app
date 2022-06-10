@@ -4,12 +4,7 @@ export type CountryType = {
   name?: {
     common: string;
     official: string;
-    nativeName: {
-      eng: {
-        official: string;
-        common: string;
-      };
-    };
+    nativeName: any;
   };
   tld?: Array<string>;
   cca2?: string;
