@@ -1,13 +1,14 @@
-//import { CountryType } from "../../api/country/types";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { getCountriesByCode } from "../../api/country";
 import { CountryType } from "../../api/country/types";
 import Btn from "../btn";
+import BorderBtn from "../border-btn";
 
 const CountryInfo: FC<any> = () => {
   const { countryCode } = useParams<string>();
+
   const { data: country } = useQuery<CountryType>(
     ["country-by-code", countryCode],
     async () => {
@@ -15,7 +16,6 @@ const CountryInfo: FC<any> = () => {
       return response.data[0];
     }
   );
-  const [borderingCountries, setBorderingCountries] = useState<any>([]);
 
   const {
     name,
@@ -29,14 +29,6 @@ const CountryInfo: FC<any> = () => {
     currencies,
     languages,
   } = country ?? {};
-
-  const border = useQuery<any>(["bordering-countries", borders], () => {
-    borders?.map(async (code) => {
-      let response = await getCountriesByCode(code);
-
-      setBorderingCountries((prev: any) => [...prev, response.data]);
-    });
-  });
 
   const getCurrencies = useCallback((currencies: any) => {
     let allCurrencies: any = [];
@@ -62,21 +54,20 @@ const CountryInfo: FC<any> = () => {
 
   return (
     <div className="card px-6 dark:bg-gray-800 dark:text-slate-200">
-      <div className="mt-6">
-        <Btn link={"/"} text={"<-- Back"} />
-      </div>
-      <div>
+      <Btn link={"/"} text={"<-- Back"} />
+
+      <div className=" sm:flex sm:gap-8">
         <img
           src={flags?.svg}
           alt={`Flag of ${name?.common}`}
-          className="pt-14"
+          className="pt-14 sm:w-1/2"
         />
-        <div className="card__info">
-          <h2 className="card__country-name text-3xl font-bold pt-8">
+        <div className="card__info sm:w-1/2">
+          <h2 className="card__country-name pt-8 text-3xl font-bold">
             {name?.common}
           </h2>
 
-          <div className="card__stats py-6 space-y-2">
+          <div className="card__stats space-y-2 py-6">
             <p className="card__stats__native-name">Native name: {}</p>
             <p className="card__stats__population">
               Population: {population?.toLocaleString()}
@@ -102,18 +93,12 @@ const CountryInfo: FC<any> = () => {
                 )}
             </p>
           </div>
-          <div className="card__border-countries mt-6 flex flex-wrap">
+          <div className="card__border-countries my-6 flex flex-wrap gap-2">
             <p>Borders:</p>
 
             <div className="flex flex-wrap gap-3">
-              {borderingCountries.map((country: any, index: string) => {
-                return (
-                  <Btn
-                    link={`/code/${country[0].ccn3}`}
-                    text={`${country[0].name?.common}`}
-                    key={index}
-                  ></Btn>
-                );
+              {(borders || []).map((code: string, index: number) => {
+                return <BorderBtn key={index} code={code}></BorderBtn>;
               })}
             </div>
           </div>

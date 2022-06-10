@@ -1,36 +1,30 @@
-const CountryCard: React.FC<any> = (prop: any) => {
-  const {
-    name,
-    population,
-    region,
-    capital,
-    flags,
-  }: {
-    name: any;
-    population: String;
-    region: String;
-    capital: String;
-    flags: any;
-  } = prop.data;
+import { Link } from "react-router-dom";
+import { CountryType } from "../../api/country/types";
+
+const CountryCard: React.FC<any> = (prop: { data: CountryType }) => {
+  const { name, population, region, capital, flags, ccn3 } = prop.data;
   return (
-    <div className="CountryCard mb-16 rounded-lg bg-slate-50 drop-shadow-lg dark:bg-gray-600">
-      <img src={flags.svg} className="rounded-t-lg w-full" alt="" />
+    <Link
+      className="sm:h-100 mb-16 rounded-lg bg-slate-50 drop-shadow-lg dark:bg-gray-600 sm:m-0 sm:w-72 md:w-60"
+      to={`/code/${ccn3}`}
+    >
+      <img src={flags?.svg} className="w-full rounded-t-lg" alt="" />
       <div className="pl-6 pt-4 pb-8">
-        <h2 className="font-bold my-4 text-lg">{name.common}</h2>
+        <h2 className="my-4 text-lg font-bold">{name?.common}</h2>
         <div className="my-1 flex">
-          <p className="font-semibold mr-1">Population:</p>
+          <p className="mr-1 font-semibold">Population:</p>
           <p>{Number(population).toLocaleString()}</p>
         </div>
         <div className="my-1 flex">
-          <p className="font-semibold mr-1">Region:</p>
+          <p className="mr-1 font-semibold">Region:</p>
           <p>{region}</p>
         </div>
         <div className="my-1 flex">
-          <p className="font-semibold mr-1">Capital:</p>
+          <p className="mr-1 font-semibold">Capital:</p>
           <p>{capital}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

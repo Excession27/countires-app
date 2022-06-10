@@ -10,7 +10,6 @@ import { useState } from "react";
 import AsyncComponent from "../components/hoc/AsyncComponent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 
 function CountryList() {
   const [filter, setFilter] = useState<{ name: string; region: string }>({
@@ -46,15 +45,15 @@ function CountryList() {
   };
 
   return (
-    <div className="pb-10 mb-10">
-      <div className="py-6 px-4 flex flex-col dark:bg-gray-800">
-        <div className="flex items-center">
+    <div className="mb-10 pb-10">
+      <div className="search-filter flex flex-col py-6 px-4 dark:bg-gray-800 sm:flex-row sm:place-content-between">
+        <div className="flex items-center sm:w-1/3">
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
-            className="dark:text-slate-200 dark:bg-gray-600 p-3 rounded-l-lg"
+            className="rounded-l-lg p-3 dark:bg-gray-600 dark:text-slate-200"
           />
           <input
-            className="px-1 py-2 dark:bg-gray-600 dark:text-slate-200 w-full rounded-r-lg"
+            className="w-full rounded-r-lg px-1 py-2 dark:bg-gray-600 dark:text-slate-200"
             placeholder="Search for a country"
             onChange={(event) => {
               setFilterName(event.target.value);
@@ -63,7 +62,7 @@ function CountryList() {
         </div>
         <select
           name="region"
-          className="dark:bg-gray-600 dark:text-slate-200 my-4 rounded-lg h-10 w-1/2 p-2"
+          className="my-4 h-10 w-1/3 rounded-lg p-2 dark:bg-gray-600 dark:text-slate-200 sm:w-1/5"
           onChange={(event) => {
             setFilterRegion(event.target.value);
           }}
@@ -77,14 +76,12 @@ function CountryList() {
         </select>
       </div>
 
-      <div className="w-full h-full px-4 bg-slate-50 dark:bg-gray-800 dark:text-slate-200">
+      <div className="h-full w-full bg-slate-50 px-4 dark:bg-gray-800 dark:text-slate-200 sm:flex sm:flex-auto sm:flex-wrap sm:place-content-around sm:gap-3">
         <AsyncComponent
           component={
             <>
               {countries?.map((country: CountryType, index: Number) => (
-                <Link to={`/code/${country.ccn3}`} key={index.toString()}>
-                  <CountryCard data={country} key={index} />
-                </Link>
+                <CountryCard data={country} key={index} />
               ))}
             </>
           }
