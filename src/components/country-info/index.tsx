@@ -1,5 +1,5 @@
 //import { CountryType } from "../../api/country/types";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { getCountriesByCode } from "../../api/country";
@@ -30,13 +30,11 @@ const CountryInfo: FC<any> = () => {
     languages,
   } = country ?? {};
 
-  useQuery<any>(["bordering-countries", borders], () => {
-    let array: any = [];
+  const border = useQuery<any>(["bordering-countries", borders], () => {
     borders?.map(async (code) => {
       let response = await getCountriesByCode(code);
-      await array.push();
+
       setBorderingCountries((prev: any) => [...prev, response.data]);
-      //console.log(borderingCountries);
     });
   });
 
@@ -104,21 +102,20 @@ const CountryInfo: FC<any> = () => {
                 )}
             </p>
           </div>
-          <div className="card__border-countries pt-6">
-            <p>
-              Borders:{console.log(borderingCountries)}
-              {borderingCountries.map((country: any) => {
-                console.log(country);
-                console.log("country");
+          <div className="card__border-countries mt-6 flex flex-wrap">
+            <p>Borders:</p>
 
+            <div className="flex flex-wrap gap-3">
+              {borderingCountries.map((country: any, index: string) => {
                 return (
                   <Btn
                     link={`/code/${country[0].ccn3}`}
                     text={`${country[0].name?.common}`}
+                    key={index}
                   ></Btn>
                 );
               })}
-            </p>
+            </div>
           </div>
         </div>
       </div>
