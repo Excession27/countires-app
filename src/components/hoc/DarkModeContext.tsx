@@ -13,16 +13,12 @@ export default function DarkModeContextProvider({
   useEffect(() => {
     localStorage.darkMode = darkMode;
     if (!darkMode) {
-      document.querySelector("body")?.classList.remove("dark");
-      document
-        .querySelector("html")
-        ?.setAttribute("style", "background-color: #ffffff");
+      document.querySelector("body")?.classList.remove("dark:bg-gray-800");
+      document.querySelector("html")?.classList.remove("dark");
     }
     if (darkMode) {
-      document.querySelector("body")?.classList.add("dark");
-      document
-        .querySelector("html")
-        ?.setAttribute("style", "background-color: #1f2937");
+      document.querySelector("body")?.classList.add("dark:bg-gray-800");
+      document.querySelector("html")?.classList.add("dark");
     }
   }, [darkMode]);
 
